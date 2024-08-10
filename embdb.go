@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/caxqueiroz/embdb/match"
 	"io"
 	"os"
 	"sort"
@@ -14,7 +15,6 @@ import (
 
 	"github.com/tidwall/btree"
 	"github.com/tidwall/gjson"
-	"github.com/tidwall/match"
 )
 
 var (
