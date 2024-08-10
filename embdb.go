@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/caxqueiroz/embdb/gjson"
 	"github.com/caxqueiroz/embdb/match"
 	"io"
 	"os"
@@ -13,8 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tidwall/btree"
-	"github.com/tidwall/gjson"
+	"github.com/caxqueiroz/embdb/btree"
 )
 
 var (

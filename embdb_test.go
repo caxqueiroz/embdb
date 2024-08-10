@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"github.com/caxqueiroz/embdb/lotsa"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"math/rand"
 	"os"
@@ -12,9 +14,6 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"github.com/tidwall/assert"
-	"github.com/tidwall/lotsa"
 )
 
 func testOpen(t testing.TB) *DB {
@@ -2623,18 +2622,18 @@ func TestReloadNotInvalid(t *testing.T) {
 
 func TestEstSize(t *testing.T) {
 	t.Run("estIntSize", func(t *testing.T) {
-		assert.Assert(estIntSize(0) == 1)
-		assert.Assert(estIntSize(1) == 1)
-		assert.Assert(estIntSize(9) == 1)
-		assert.Assert(estIntSize(10) == 2)
-		assert.Assert(estIntSize(11) == 2)
-		assert.Assert(estIntSize(19) == 2)
-		assert.Assert(estIntSize(20) == 2)
-		assert.Assert(estIntSize(113) == 3)
-		assert.Assert(estIntSize(3822) == 4)
-		assert.Assert(estIntSize(-1) == 2)
-		assert.Assert(estIntSize(-12) == 3)
-		assert.Assert(estIntSize(-124) == 4)
+		assert.Equal(t, estIntSize(0), 1)
+		assert.Equal(t, estIntSize(1), 1)
+		assert.Equal(t, estIntSize(9), 1)
+		assert.Equal(t, estIntSize(10), 2)
+		assert.Equal(t, estIntSize(11), 2)
+		assert.Equal(t, estIntSize(19), 2)
+		assert.Equal(t, estIntSize(20), 2)
+		assert.Equal(t, estIntSize(113), 3)
+		assert.Equal(t, estIntSize(3822), 4)
+		assert.Equal(t, estIntSize(-1), 2)
+		assert.Equal(t, estIntSize(-12), 3)
+		assert.Equal(t, estIntSize(-124), 4)
 	})
 }
 
@@ -2682,7 +2681,7 @@ func TestIssue112(t *testing.T) {
 		_, err := tx.Get("key:112")
 		return err
 	})
-	assert.Assert(err == ErrNotFound)
+	assert.Equal(t, err, ErrNotFound)
 	db.View(func(tx *Tx) error {
 		err := tx.Ascend("", func(key, value string) bool {
 			t.Fatalf("key: %s, value: %s\n", key, value)
